@@ -1,0 +1,57 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="contato.css">
+        <title>Agenda de Contatos</title>
+    </head>
+    <body>
+        <h1>Agenda de Contatos</h1>
+        
+        <form id="contato-form">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required><br>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br>
+            
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" required><br>
+            
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" required><br>
+            
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" required><br>
+            
+            <label for="dataNascimento">Data de Nascimento:</label>
+            <input type="date" id="dataNascimento" required><br>
+            
+            <button type="button" id="salvar-contato" style="display: none;">Salvar Contato</button>
+            <button type="button" id="adicionar-contato">Adicionar Contato</button>
+        </form>
+
+        <table id="lista-contatos">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Endereço</th>
+                    <th>CPF</th>
+                    <th>Data de Nascimento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aqui serão exibidos os contatos adicionados -->
+            </tbody>
+        </table>
+
+
+
+        
+        <script src="agendaControl.js" type="module"></script>
+        
+    </body>
+    </html>
