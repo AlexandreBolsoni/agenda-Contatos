@@ -14,6 +14,8 @@ const inputs = {
 
 document.getElementById('adicionar-contato').addEventListener('click', acrescentarContato);
 
+document.getElementById('btPesquisar').addEventListener('click', pesquisarContato);
+
 function acrescentarContato() {
   const { nome, email, telefone, endereco, cpf, dataNascimento } = inputs;
   if (Object.values(inputs).some(input => input.value === '')) {
@@ -34,33 +36,42 @@ function acrescentarContato() {
   atualizarTabelaContatos();
 }
 
-function atualizarTabelaContatos() {
-    tabelaContatos.innerHTML = '';
-    vetContatos.forEach((contato, index) => {
-      const row = tabelaContatos.insertRow();
-      
-      Object.values(contato).forEach(value => {
-        const cell = row.insertCell();
-        cell.textContent = value;
-      });
-  
-      const cellAcoes = row.insertCell();
-      const botaoEditar = criarBotao('Editar', () => editarContato(index));
-      const botaoExcluir = criarBotao('Excluir', () => excluirContato(index));
-  
-      cellAcoes.appendChild(botaoEditar);
-      cellAcoes.appendChild(botaoExcluir);
-    });
-  }
-  
 
-  function criarBotao(texto, callback) {
-    const botao = document.createElement('button');
-    botao.textContent = texto;
-    botao.addEventListener('click', callback);
-    botao.classList.add('botao'); // Adiciona uma classe chamada 'botao' aos botões
-    return botao;
-  }
+
+function pesquisarContato() {
+  const termoPesquisa = document.getElementById('inPesquisar').value.toLowerCase();
+  const resultados = vetContatos.filter(contato => contato.nome.toLowerCase().includes(termoPesquisa));
+  atualizarTabelaContatos(resultados);
+}
+
+
+function atualizarTabelaContatos() {
+  tabelaContatos.innerHTML = '';
+  vetContatos.forEach((contato, index) => {
+    const row = tabelaContatos.insertRow();
+
+    Object.values(contato).forEach(value => {
+      const cell = row.insertCell();
+      cell.textContent = value;
+    });
+
+    const cellAcoes = row.insertCell();
+    const botaoEditar = criarBotao('Editar', () => editarContato(index));
+    const botaoExcluir = criarBotao('Excluir', () => excluirContato(index));
+
+    cellAcoes.appendChild(botaoEditar);
+    cellAcoes.appendChild(botaoExcluir);
+  });
+}
+
+
+function criarBotao(texto, callback) {
+  const botao = document.createElement('button');
+  botao.textContent = texto;
+  botao.addEventListener('click', callback);
+  botao.classList.add('botao'); // Adiciona uma classe chamada 'botao' aos botões
+  return botao;
+}
 
 function editarContato(index) {
   const contato = vetContatos[index];
