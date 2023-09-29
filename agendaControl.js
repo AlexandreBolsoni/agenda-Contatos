@@ -1,63 +1,83 @@
-import { Contato } from "./contatos";
+// Arquivo main.js
+const vetContatos = [];
+const salvarContatoBtn = document.getElementById('salvar-contato');
+const tabelaContatos = document.querySelector('#lista-contatos tbody');
 
-const adicionarContato = document.getElementById('adicionar-contato');
-adicionarContato.addEventListener('click', () => {
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const telefone = document.getElementById('telefone').value.toString(); // Converte para string
-    const endereco = document.getElementById('endereco').value;
-    const cpf = document.getElementById('cpf').value;
-    const dataNascimento = document.getElementById('dataNascimento').value;
+const inputs = {
+  nome: document.getElementById('nome'),
+  email: document.getElementById('email'),
+  telefone: document.getElementById('telefone'),
+  endereco: document.getElementById('endereco'),
+  cpf: document.getElementById('cpf'),
+  dataNascimento: document.getElementById('dataNascimento')
+};
 
-    agenda.adicionarContato(nome, email, telefone, endereco, cpf, dataNascimento);
-});
+document.getElementById('adicionar-contato').addEventListener('click', acrescentarContato);
 
-
-
-class Agenda {
-    constructor() {
-        this.vetContatos = [];
-    }
-
-    adicionarContato(nome, email, telefone, endereco, cpf, dataNascimento) {
-        const nomeUpperCase = nome.toUpperCase();
-        const contatoExistente = this.vetContatos.some(contato => contato.nome === nomeUpperCase);
-
-        if (nome === "" || email === "" || telefone === "" ||
-            endereco === "" || cpf === "" || dataNascimento === "") {
-            alert("Por favor, preencha todos os campos obrigatórios.");
-        } else if (contatoExistente) {
-            alert(`Já existe um contato com o nome ${nome}.`);
-        } else {
-            const novoContato = new Contato(nome, email, telefone, endereco, cpf, dataNascimento);
-            this.vetContatos.push(novoContato);
-            alert(`Contato ${nome} adicionado com sucesso.`);
-            this.atualizarTabelaContatos();
-        }
-    }
-
-    atualizarTabelaContatos() {
-        const tabelaContatos = document.querySelector('#lista-contatos tbody');
-        tabelaContatos.innerHTML = ''; // Limpe a tabela
-
-        // Adicione cada contato à tabela
-        this.vetContatos.forEach(contato => {
-            const row = tabelaContatos.insertRow();
-            const cellNome = row.insertCell(0);
-            const cellEmail = row.insertCell(1);
-            const cellTelefone = row.insertCell(2);
-            const cellEndereco = row.insertCell(3);
-            const cellCPF = row.insertCell(4);
-            const cellDataNascimento = row.insertCell(5);
-
-            cellNome.textContent = contato.nome;
-            cellEmail.textContent = contato.email;
-            cellTelefone.textContent = contato.telefone;
-            cellEndereco.textContent = contato.endereco;
-            cellCPF.textContent = contato.cpf;
-            cellDataNascimento.textContent = contato.dataNascimento;
-        });
-    }
+function acrescentarContato() {
+  const { nome, email, telefone, endereco, cpf, dataNascimento } = inputs;
+  if (Object.values(inputs).some(input => input.value === '')) {
+    alert("Por favor, preencha todos os campos obrigatórios.");
+    return;
+  }
+  const novoContato = {
+    nome: nome.value,
+    email: email.value,
+    telefone: telefone.value,
+    endereco: endereco.value,
+    cpf: cpf.value,
+    dataNascimento: dataNascimento.value
+  };
+  vetContatos.push(novoContato);
+  alert(`Contato ${nome.value} adicionado com sucesso.`);
+  limparCampos();
+  atualizarTabelaContatos();
 }
 
-const agenda = new Agenda();
+function atualizarTabelaContatos() {
+    tabelaContatos.innerHTML = '';
+    vetContatos.forEach((contato, index) => {
+      const row = tabelaContatos.insertRow();
+      
+      Object.values(contato).forEach(value => {
+        const cell = row.insertCell();
+        cell.textContent = value;
+      });
+  
+      const cellAcoes = row.insertCell();
+      const botaoEditar = criarBotao('Editar', () => editarContato(index));
+      const botaoExcluir = criarBotao('Excluir', () => excluirContato(index));
+  
+      cellAcoes.appendChild(botaoEditar);
+      cellAcoes.appendChild(botaoExcluir);
+    });
+  }
+  
+
+  function criarBotao(texto, callback) {
+    const botao = document.createElement('button');
+    botao.textContent = texto;
+    botao.addEventListener('click', callback);
+    botao.classList.add('botao'); // Adiciona uma classe chamada 'botao' aos botões
+    return botao;
+  }
+
+function editarContato(index) {
+  const contato = vetContatos[index];
+  Object.entries(inputs).forEach(([key, input]) => {
+    input.value = contato[key];
+  });
+}
+
+function excluirContato(index) {
+  if (confirm("Tem certeza de que deseja excluir este contato?")) {
+    vetContatos.splice(index, 1);
+    atualizarTabelaContatos();
+  }
+}
+
+function limparCampos() {
+  Object.values(inputs).forEach(input => {
+    input.value = '';
+  });
+}

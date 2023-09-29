@@ -1,40 +1,100 @@
-/* Estilize o título "Agenda de Contatos" */
-h1 {
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+  
+  h1 {
     text-align: center;
     font-size: 24px;
     color: #333;
-}
-
-/* Estilize o formulário */
-#contato-form {
-  width: 500px;
+  }
+  
+  #contato-form {
+    max-width: 500px;
     margin: 0 auto;
     padding: 30px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     border-radius: 10px;
-}
-
-/* Estilize as etiquetas e campos de entrada do formulário */
-label {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  label {
     display: block;
-    margin-bottom: 5px;
     font-weight: bold;
     color: #333;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="date"] {
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="date"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="date"]:focus {
+    border-color: #007bff;
+  }
+  
+  #inPesquisar {
+    margin: 20px auto;
+    display: block;
+    width: 30%;
+    padding: 10px;
+    background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-/* Estilize o botão "Adicionar Contato" */
-#adicionar-contato,
-#salvar-contato {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #inPesquisar:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .botao {
+    margin: 2px auto;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .botao:hover {
+    background-color: #0056b3;
+  }
+  
+  #btPesquisar {
+    margin: 20px auto;
+    display: block;
+    width: 30%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #btPesquisar:hover {
+    background-color: #0056b3;
+  }
+  
+  #adicionar-contato,
+  #salvar-contato {
+    margin: 15px auto;
     display: block;
     width: 100%;
     padding: 10px;
@@ -43,38 +103,40 @@ input[type="date"] {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-}
-
-/* Estilize a tabela de contatos */
-#lista-contatos {
+    transition: background-color 0.3s ease;
+  }
+  
+  #adicionar-contato:hover,
+  #salvar-contato:hover {
+    background-color: #0056b3;
+  }
+  
+  #lista-contatos {
+    text-align: center;
     border-radius: 5px;
-    width: 900px;
-    margin: auto;
+    max-width: 900px;
+    margin: 20px auto;
     border-collapse: collapse;
     background-color: #fff;
-}
-
-/* Estilize as células da tabela */
-#lista-contatos td {
-   padding: 10px;
-   
-}
-
-/* Estilize as células da tabela - cabeçalho (se houver) */
-#lista-contatos th {
-    background-color: #007bffc6;
-    color: #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  #lista-contatos td {
+    padding: 10px;
+  }
+  
+  #lista-contatos th {
+    background-color: #007bff;
+    color: #fff;
     font-weight: bold;
     padding: 10px;
-   
-}
-
-/* Estilize as células da tabela - linhas alternadas */
-#lista-contatos tr:nth-child(even) {
-    background-color: #007bff3a;
-}
-
-/* Estilize as células da tabela - hover */
-#lista-contatos tr:hover {
+  }
+  
+  #lista-contatos tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+  
+  #lista-contatos tr:hover {
     background-color: #e0e0e0;
-}
+  }
+  
