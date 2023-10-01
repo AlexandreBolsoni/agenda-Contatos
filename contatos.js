@@ -14,3 +14,4 @@ export class Contato {
         this.dataNascimento = dataNascimento.toUpperCase();
     }
 }
+
